@@ -45,8 +45,8 @@ namespace ReplacementAsset.Controllers
                     assetRequestTypeReplace = n.AssetRequest.TypeReplace,
                     assetRequestApprovalDate = n.AssetRequest.ApprovalDate.HasValue ? n.AssetRequest.ApprovalDate.Value.ToString("dd MMM yyyy") : null,
                     name = n.Name,
-                    newType = n.NewType,
-                    newSerialNumber = n.NewSerialNumber,
+                    newType = n.NewType ?? string.Empty, // Menangani nilai null
+                    newSerialNumber = n.NewSerialNumber ?? string.Empty, // Menangani nilai null
                     dateReplace = n.DateReplace.HasValue ? n.DateReplace.Value.ToString("dd MMM yyyy") : null
                 })
                 .ToList();

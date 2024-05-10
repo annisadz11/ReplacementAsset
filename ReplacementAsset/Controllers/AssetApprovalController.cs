@@ -46,11 +46,12 @@ namespace ReplacementAsset.Controllers
             return Json(new { rows = AssetRequests });
         }
 
-
+        //APPROVE MANAGER
         [HttpPost]
         public async Task<IActionResult> Approve(int id, string justify, string typeReplace)
         {
             var assetRequest = await _context.AssetRequest.FindAsync(id);
+
             if (assetRequest == null)
             {
                 return NotFound();
@@ -66,7 +67,10 @@ namespace ReplacementAsset.Controllers
                 var newAssetReplacement = new NewAssetReplacement
                 {
                     AssetRequestId = assetRequest.Id,
-                    Name = assetRequest.Name ?? string.Empty // Menangani null value
+                    Name = assetRequest.Name ?? string.Empty,
+                    NewType = string.Empty, // Menyediakan nilai default (string kosong)
+                    NewSerialNumber = string.Empty, // Menyediakan nilai default (string kosong)
+                    
                 };
                 _context.NewAssetReplacement.Add(newAssetReplacement);
             }
@@ -74,8 +78,9 @@ namespace ReplacementAsset.Controllers
             {
                 var componentAssetReplacement = new ComponentAssetReplacement
                 {
+
                     AssetRequestId = assetRequest.Id,
-                    Name = assetRequest.Name ?? string.Empty // Menangani null value
+                    Name = assetRequest.Name ?? string.Empty
                 };
                 _context.ComponentAssetReplacement.Add(componentAssetReplacement);
             }
@@ -89,10 +94,8 @@ namespace ReplacementAsset.Controllers
             {
                 // Log the exception details
                 Console.WriteLine(ex.ToString());
-
                 return Json(new { success = false, message = "Error approving the request: " + (ex.InnerException?.Message ?? "No additional details available.") });
             }
-
         }
 
 

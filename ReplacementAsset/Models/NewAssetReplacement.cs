@@ -14,8 +14,8 @@ namespace ReplacementAsset.Models
         public AssetRequest AssetRequest { get; set; }
         [Required]
         public string Name { get; set; }
-        public string NewType { get; set; }
-        public string NewSerialNumber { get; set; }
+        public string? NewType { get; set; }
+        public string? NewSerialNumber { get; set; }
         public DateTime? DateReplace { get; set; }
 
     }
