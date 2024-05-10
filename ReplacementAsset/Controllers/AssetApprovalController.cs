@@ -1,6 +1,7 @@
 ﻿using ReplacementAsset.Data;
 using Microsoft.AspNetCore.Mvc;
 using ReplacementAsset.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ReplacementAsset.Controllers
 {
@@ -65,7 +66,7 @@ namespace ReplacementAsset.Controllers
                 var newAssetReplacement = new NewAssetReplacement
                 {
                     AssetRequestId = assetRequest.Id,
-                    Name = assetRequest.Name
+                    Name = assetRequest.Name ?? string.Empty // Menangani null value
                 };
                 _context.NewAssetReplacement.Add(newAssetReplacement);
             }
@@ -74,16 +75,27 @@ namespace ReplacementAsset.Controllers
                 var componentAssetReplacement = new ComponentAssetReplacement
                 {
                     AssetRequestId = assetRequest.Id,
-                    Name = assetRequest.Name
+                    Name = assetRequest.Name ?? string.Empty // Menangani null value
                 };
                 _context.ComponentAssetReplacement.Add(componentAssetReplacement);
             }
 
-            _context.Update(assetRequest);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Json(new { success = true, message = "Asset request approved successfully!" });
+            }
+            catch (DbUpdateException ex)
+            {
+                // Log the exception details
+                Console.WriteLine(ex.ToString());
 
-            return Json(new { success = true, message = "Asset request approved successfully!" });
+                return Json(new { success = false, message = "Error approving the request: " + (ex.InnerException?.Message ?? "No additional details available.") });
+            }
+
         }
+
+
 
 
         //REJECT MANAGER

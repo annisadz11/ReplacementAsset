@@ -75,7 +75,7 @@ namespace ReplacementAsset.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AssetRequest");
+                    b.ToTable("AssetRequest", (string)null);
                 });
 
             modelBuilder.Entity("ReplacementAsset.Models.AssetScrap", b =>
@@ -106,7 +106,7 @@ namespace ReplacementAsset.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AssetScrap");
+                    b.ToTable("AssetScrap", (string)null);
                 });
 
             modelBuilder.Entity("ReplacementAsset.Models.ComponentAssetReplacement", b =>
@@ -134,7 +134,7 @@ namespace ReplacementAsset.Migrations
 
                     b.HasIndex("AssetRequestId");
 
-                    b.ToTable("ComponentAssetReplacement");
+                    b.ToTable("ComponentAssetReplacement", (string)null);
                 });
 
             modelBuilder.Entity("ReplacementAsset.Models.NewAssetReplacement", b =>
@@ -167,7 +167,7 @@ namespace ReplacementAsset.Migrations
 
                     b.HasIndex("AssetRequestId");
 
-                    b.ToTable("NewAssetReplacement");
+                    b.ToTable("NewAssetReplacement", (string)null);
                 });
 
             modelBuilder.Entity("ReplacementAsset.Models.ComponentAssetReplacement", b =>

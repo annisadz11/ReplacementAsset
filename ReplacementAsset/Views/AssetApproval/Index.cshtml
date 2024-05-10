@@ -157,7 +157,7 @@
                     });
                 } else {
                     $.ajax({
-                        url: "@Url.Action("Approve", "AssetApproval")",
+                        url: "@Url.Action("Approve", "AssetApproval")", // Ganti dengan URL yang benar
                         type: "POST",
                         data: { id: id, justify: justify, typeReplace: typeReplace },
                         success: function (response) {
@@ -170,18 +170,13 @@
                                     if (result.isConfirmed) {
                                         $('#table').bootstrapTable('refresh');
                                         $('#approveModal').modal('hide');
-                                        if (typeReplace === 'NewAssetReplacement') {
-                                            window.location.href = "@Url.Action("Index", "NewAssetReplacements")";
-                                        } else if (typeReplace === 'ComponentAssetReplacement') {
-                                            window.location.href = "@Url.Action("Index", "ComponentAssetReplacements")";
-                                        }
                                     }
                                 });
                             } else {
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
-                                    text: 'Error approving the request.'
+                                    text: response.message
                                 });
                             }
                         },
@@ -197,6 +192,8 @@
                 }
             });
         }
+
+
 
 
         function rejectRequest(id, name) {

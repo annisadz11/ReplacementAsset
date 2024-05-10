@@ -20,11 +20,39 @@ namespace ReplacementAsset.Controllers
         }
 
         // GET: ComponentAssetReplacements
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.ComponentAssetReplacement.Include(c => c.AssetRequest);
-            return View(await applicationDbContext.ToListAsync());
+            var componentAssetReplacements = _context.ComponentAssetReplacement.Include(n => n.AssetRequest).ToList();
+            return View(componentAssetReplacements);
         }
+
+        /*// API ENDPOINT
+        [HttpGet]
+        public IActionResult GetData()
+        {
+            var componentAssetReplacements = _context.ComponentAssetReplacement
+                .Select(n => new
+                {
+                    id = n.Id,
+                    assetRequestName = n.AssetRequest.Name,
+                    assetRequestDepartment = n.AssetRequest.Departement,
+                    assetRequestType = n.AssetRequest.Type,
+                    assetRequestSerialNumber = n.AssetRequest.SerialNumber,
+                    assetRequestBaseline = n.AssetRequest.Baseline,
+                    assetRequestUsageLocation = n.AssetRequest.UsageLocation,
+                    assetRequestReason = n.AssetRequest.Reason,
+                    assetRequestJustify = n.AssetRequest.Justify,
+                    assetRequestTypeReplace = n.AssetRequest.TypeReplace,
+                    assetRequestApprovalDate = n.AssetRequest.ApprovalDate.HasValue ? n.AssetRequest.ApprovalDate.Value.ToString("dd MMM yyyy") : null,
+                    name = n.Name,
+                    validationReplace = n.validationReplace,
+                    componentReplaceDate = n.componentReplaceDate.HasValue ? n.componentReplaceDate.Value.ToString("dd MMM yyyy") : null
+                })
+                .ToList();
+
+            return Json(new { rows = componentAssetReplacements });
+        }*/
+
 
         // GET: ComponentAssetReplacements/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -82,7 +110,6 @@ namespace ReplacementAsset.Controllers
             {
                 return NotFound();
             }
-            ViewData["AssetRequestId"] = new SelectList(_context.AssetRequest, "Id", "Name", componentAssetReplacement.AssetRequestId);
             return View(componentAssetReplacement);
         }
 

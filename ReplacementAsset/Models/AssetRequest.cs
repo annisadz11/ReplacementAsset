@@ -19,5 +19,11 @@ namespace ReplacementAsset.Models
         public DateTime? ApprovalDate { get; set; }
         public string? Justify { get; set; }
         public string? TypeReplace { get; set; }
+/*
+        // Navigasi properti ke NewAssetReplacement
+        public NewAssetReplacement? NewAssetReplacement { get; set; }
+
+        // Navigasi properti ke ComponentAssetReplacement
+        public ComponentAssetReplacement? ComponentAssetReplacement { get; set; }*/
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<ReplacementAsset.Models.NewAssetReplacement>
+﻿
 
 @{
     ViewData["Title"] = "New Asset Replacement";
@@ -26,7 +26,7 @@
                    data-show-columns="true"
                    data-buttons="[]"
                    data-key-events="true"
-                   data-url="@Url.Action("GetData", "NewAssetReplacement")"
+                   data-url="@Url.Action("GetData", "NewAssetReplacements")"
                    data-pagination="true"
                    data-side-pagination="server"
                    data-show-columns-toggle-all="true"
@@ -75,7 +75,7 @@
             // Periksa apakah tabel sudah diinisialisasi sebelumnya
             if (!$table.data('bootstrap.table')) {
                 $table.bootstrapTable({
-                    url: '@Url.Action("GetData", "NewAssetReplacement")',
+                    url: '@Url.Action("GetData", "NewAssetReplacements")',
                     pageSize: 50,
                     columns: [
                         // Definisikan kolom-kolom tabel di sini
